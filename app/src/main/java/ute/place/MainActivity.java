@@ -16,8 +16,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONObject;
 
@@ -33,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://apitest.orange.pl/Localization/v1/GeoLocation?msisdn=48506436958&apikey=qr1d7R3Ag3gop06s1bzRuySh7fxukfSA";
         JSONObject[] json = getRequest(url);
 
-        LatLngBounds orangeLocation = getLatLngBounds(new LatLng(52.220955,21.008073));
-        builder.setLatLngBounds(orangeLocation);
+        //LatLngBounds orangeLocation = getLatLngBounds(new LatLng(52.220955,21.008073));
+        //builder.setLatLngBounds(orangeLocation);
 
         try {
             Intent intent = builder.build(getApplicationContext());
@@ -43,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    public static LatLngBounds getLatLngBounds(LatLng center) {
-        double radius = 100;
-
-        LatLng southwest = SphericalUtil.computeOffset(center, radius * Math.sqrt(2.0), 225);
-        LatLng northeast = SphericalUtil.computeOffset(center, radius * Math.sqrt(2.0), 45);
-        return new LatLngBounds(southwest, northeast);
-    }
+//    public static LatLngBounds getLatLngBounds(LatLng center) {
+//        double radius = 100;
+//
+//        LatLng southwest = SphericalUtil.computeOffset(center, radius * Math.sqrt(2.0), 225);
+//        LatLng northeast = SphericalUtil.computeOffset(center, radius * Math.sqrt(2.0), 45);
+//        return new LatLngBounds(southwest, northeast);
+//    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==PLACE_PICKER_REQUEST_CODE){
             if(resultCode == RESULT_OK) {
@@ -61,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // this should return latitude from json
     private int getLatitude(JSONObject[] object){
         return 0;
     }
+    // this should return longtitude from json
     private int getLongitude(JSONObject[] object){
         return 0;
     }
